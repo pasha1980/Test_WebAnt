@@ -18,6 +18,7 @@ class PictureController extends AbstractController
      */
     public function uploadPicture(Request $request): Response
     {
+
         dd('upload method');
         /**
          * @todo: Verify if user is logged and upload picture

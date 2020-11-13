@@ -10,8 +10,22 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
- * @ApiResource()
- * @ApiFilter(SearchFilter::class, properties={"name":"exact", "category": "exact"})
+ * @ApiResource(
+ *     attributes={"pagination_items_per_page"=12},
+ *     collectionOperations={
+ *     "get",
+ *     "post_upload" = {
+ *         "route_name"="upload_picture",
+ *         "method"="POST",
+ *     }
+ * },
+ *     itemOperations={
+ *     "get_view"={
+ *         "route_name"="view_picture",
+ *     },
+ *     "delete"
+ * }
+ *     )
  */
 class Picture
 {
@@ -19,11 +33,13 @@ class Picture
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ApiFilter(SearchFilter::class)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ApiFilter(SearchFilter::class)
      */
     private $name;
 
@@ -34,6 +50,7 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length=8)
+     * @ApiFilter(SearchFilter::class)
      */
     private $category;
 

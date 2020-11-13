@@ -28,7 +28,7 @@ class Picture
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=8)
      */
     private $category;
 
@@ -42,6 +42,11 @@ class Picture
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="picture")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $views;
 
     public function getId(): ?int
     {
@@ -79,6 +84,11 @@ class Picture
 
     public function setCategory(string $category): self
     {
+        if (!in_array($category, ['new', 'popular']))
+        {
+            throw new \InvalidArgumentException("Category must be only \"new\" or \"popular\"");
+        }
+
         $this->category = $category;
 
         return $this;
@@ -104,6 +114,18 @@ class Picture
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
 
         return $this;
     }

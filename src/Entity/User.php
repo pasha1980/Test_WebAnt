@@ -1,5 +1,5 @@
 <?php
-// todo: Don't understand exactly with login
+
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -21,7 +21,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "route_name"="user_register",
  *         }
  *     },
- *     itemOperations={"get"}
+ *     itemOperations={
+ *         "get",
+ *         "delete_all_pictures"={
+ *             "method"="GET",
+ *             "route_name"="delete_users_picture",
+ *         }
+ *     }
  * )
  */
 class User implements UserInterface

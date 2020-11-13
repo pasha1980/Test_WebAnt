@@ -8,6 +8,7 @@ use App\Entity\Picture;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PictureController extends AbstractController
@@ -16,13 +17,9 @@ class PictureController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function uploadPicture(Request $request): Response
+    public function pictureUpload(Request $request)
     {
 
-        dd('upload method');
-        /**
-         * @todo: Verify if user is logged and upload picture
-         */
     }
 
     /**
@@ -31,11 +28,22 @@ class PictureController extends AbstractController
      * @param int $id
      * @return Response
      */
-    public function viewPicture(Request $request, int $id): Response
+    public function viewPicture(Request $request, int $id)
     {
-        dd('view method');
-        /**
-         * @todo Show picture and make counter += 1
-         */
+        $em = $this->getDoctrine()->getManager();
+        $picture = $em->getRepository(Picture::class)->find($id);
+        $view = $picture->getViews();
+        $view++;
+        $picture->setViews($view);
+
+        $em->persist($picture);
+        $em->flush();
+        dump($picture);
+//        $response = json_encode($picture);
+//        dd($response);
+//        return $response
+        dd('');
+        // todo Problem
+//        dd($this->json($));
     }
 }

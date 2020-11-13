@@ -12,3 +12,12 @@ upload_picture:
     _api_resource_class: App\Enity\Picture
     _api_item_operation_name: post_upload
 
+upload_file:
+  path: /api/files/upload
+  methods: ['POST']
+  defaults:
+    _controller: App\Controller\FileController::fileUpload
+    _api_resource_class: App\Enity\File
+    _api_item_operation_name: post_upload
+
+

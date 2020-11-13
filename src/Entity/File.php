@@ -2,11 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
+ * @ApiResource(
+ *     collectionOperations={
+ *         "post_upload" = {
+ *             "route_name"="upload_file",
+ *             "method"="POST",
+ *         },
+ *     },
+ *     itemOperations={}
+ * )
  */
 class File
 {

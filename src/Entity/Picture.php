@@ -23,7 +23,6 @@ use Doctrine\ORM\Mapping as ORM;
  *     "get_view"={
  *         "route_name"="view_picture",
  *     },
- *     "delete"
  * }
  *     )
  */

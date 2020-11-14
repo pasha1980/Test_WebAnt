@@ -37,10 +37,10 @@ class File
      */
     private $path;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Picture::class, mappedBy="file", cascade={"persist", "remove"})
-     */
-    private $picture;
+//    /**
+//     * @ORM\OneToOne(targetEntity=Picture::class, mappedBy="file", cascade={"persist", "remove"})
+//     */
+//    private $picture;
 
     public function getId(): ?int
     {
@@ -71,20 +71,20 @@ class File
         return $this;
     }
 
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(Picture $picture): self
-    {
-        $this->picture = $picture;
-
-        // set the owning side of the relation if necessary
-        if ($picture->getFile() !== $this) {
-            $picture->setFile($this);
-        }
-
-        return $this;
-    }
+//    public function getPicture(): ?Picture
+//    {
+//        return $this->picture;
+//    }
+//
+//    public function setPicture(Picture $picture): self
+//    {
+//        $this->picture = $picture;
+//
+//        // set the owning side of the relation if necessary
+//        if ($picture->getFile() !== $this) {
+//            $picture->setFile($this);
+//        }
+//
+//        return $this;
+//    }
 }

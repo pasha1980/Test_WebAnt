@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     },
  * }
  *     )
+ * @ApiFilter(OrderFilter::class, properties={"views"="DESC"})
  */
 class Picture
 {
@@ -54,7 +56,7 @@ class Picture
     private $category;
 
     /**
-     * @ORM\OneToOne(targetEntity=File::class, inversedBy="picture", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=File::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $file;

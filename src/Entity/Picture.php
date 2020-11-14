@@ -15,10 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     attributes={"pagination_items_per_page"=12},
  *     collectionOperations={
  *     "get",
- *     "post_upload" = {
- *         "route_name"="upload_picture",
- *         "method"="POST",
- *     }
+ *     "post"
  * },
  *     itemOperations={
  *     "get_view"={

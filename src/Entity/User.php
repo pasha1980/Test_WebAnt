@@ -1,5 +1,5 @@
 <?php
-
+// todo: serialize
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "register"={
  *             "method"="POST",
  *             "route_name"="user_register",
+ *             "normalization_context"={"gropus"={"registration"}},
  *         }
  *     },
  *     itemOperations={
@@ -41,6 +42,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups("registration")
      */
     private $email;
 
@@ -52,6 +54,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups("registration")
      */
     private $password;
 
@@ -59,6 +62,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="user")
      */
     private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $confCode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $confirmed;
 
     public function __construct()
     {
@@ -170,6 +183,30 @@ class User implements UserInterface
                 $picture->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConfCode(): ?string
+    {
+        return $this->confCode;
+    }
+
+    public function setConfCode(string $confCode): self
+    {
+        $this->confCode = $confCode;
+
+        return $this;
+    }
+
+    public function getConfirmed(): ?bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(bool $confirmed): self
+    {
+        $this->confirmed = $confirmed;
 
         return $this;
     }

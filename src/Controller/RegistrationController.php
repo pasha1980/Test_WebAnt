@@ -14,13 +14,13 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @Route("/api/register", name="user_register", methods={"POST"})
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, Authenticator $authenticator): Response
-    {
-        $user = new User();
-        dd('registration');
+//    /**
+//     * @Route("/api/register", name="user_register", methods={"POST"})
+//     */
+//    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, Authenticator $authenticator): Response
+//    {
+//        $user = new User();
+//        dd('registration');
 //        $form = $this->createForm(RegistrationFormType::class, $user);
 //        $form->handleRequest($request);
 //
@@ -50,5 +50,5 @@ class RegistrationController extends AbstractController
 //        return $this->render('registration/register.html.twig', [
 //            'registrationForm' => $form->createView(),
 //        ]);
-    }
+//    }
 }

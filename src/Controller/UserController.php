@@ -76,7 +76,7 @@ class UserController extends AbstractController
     /**
      * @Route("/confirm/{confirmationCode}", methods={"GET"})
      */
-    public function confirmRegistration(Request $request, string $confirmationCode, GuardAuthenticatorHandler $guardHandler, Authenticator $authenticator)
+    public function confirmRegistration(Request $request, string $confirmationCode)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy(["confCode"=>$confirmationCode]);
@@ -85,11 +85,9 @@ class UserController extends AbstractController
         }
 
         $user->setConfirmed(true);
-        return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect('/api/login');
     }
 }
